@@ -1,5 +1,6 @@
-# put your code here.
-def word_count(file_name):
+
+# Functions
+def word_count(file_name = "test.txt"):
     """ Prints number of space-separated words in a given file"""
 
     words = {}
@@ -12,28 +13,30 @@ def word_count(file_name):
 
     return words
 
-print "Small data word count:"
 
-counted_words = word_count("test.txt")
-for key, value in counted_words.items():
-    print key, value
-print
-
-raw_input()
-
-
-def write_to_file(big_data, file_name):
-    with open(file_name, "w+") as output:
+def write_to_file(big_data, output_file_name = "output_stat.txt"):
+    with open(output_file_name, "w+") as output:
         for key, value in big_data.iteritems():
             output.write("%s %s\n" % (key, value))
 
-print "Bigger data word count:"
 
-big_counted_words = word_count("twain.txt")
+data_choice = raw_input("Print result on screen or in file (S/F):")
 
-write_to_file(big_counted_words, "stat_for_twain.txt")
+file_name = raw_input("Type the file_name to work on\
+    or Enter for default choice: ")
 
-print "Check out stat_for_twain.txt"
+if data_choice == "S":
+    counted_words = word_count("test.txt")
+    for key, value in counted_words.items():
+        print key, value
+
+else:
+    if file_name == "":
+        file_name = "twain.txt"
+
+    big_counted_words = word_count(file_name)
+    write_to_file(big_counted_words)
+    print "Check out output in file"
 
 # cat file_name - prints out file on screen
 # touch file_name - creates new file
